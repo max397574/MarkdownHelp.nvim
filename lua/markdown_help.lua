@@ -4,6 +4,9 @@ local function create_commands()
   vim.cmd("command! -bang -nargs=0 MdHeading1 :lua require('markdown_help').Heading1()")
   vim.cmd("command! -bang -nargs=0 MdHeading2 :lua require('markdown_help').Heading2()")
   vim.cmd("command! -bang -nargs=0 MdHeading3 :lua require('markdown_help').Heading3()")
+  vim.cmd("command! -bang -nargs=0 MdOrderedList :lua require('markdown_help').OrderedList()")
+  vim.cmd("command! -bang -nargs=0 MdUnorderedList :lua require('markdown_help').UnorderedList()")
+  vim.cmd("command! -bang -nargs=0 MdTaskList :lua require('markdown_help').TaskList()")
 end
 
 function M.Heading1()
@@ -34,6 +37,27 @@ function M.Heading3()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(bufnr,row-1,row-1,false,{new_text})
   vim.api.nvim_del_current_line()
+end
+
+function M.OrderedList()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row = cursor[1]
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_lines(bufnr,row,row,false,{"1. List Item", "2. List Item", "3. List Item"})
+end
+
+function M.TaskList()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row = cursor[1]
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_lines(bufnr,row,row,false,{"[ ] List Item", "[ ] List Item", "[ ] List Item"})
+end
+
+function M.UnorderedList()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row = cursor[1]
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_lines(bufnr,row,row,false,{"* List Item", "* List Item", "* List Item"})
 end
 
 function M.init()
