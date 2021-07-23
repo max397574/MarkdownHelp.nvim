@@ -1,5 +1,5 @@
 "prevent loading the file twice
-if existes("g:loaded_markdown_help")
+if exists("g:loaded_markdown_help")
     finish
 endif
 
