@@ -7,6 +7,7 @@ local function create_commands()
   vim.cmd("command! -bang -nargs=0 MdOrderedList :lua require('markdown_help').OrderedList()")
   vim.cmd("command! -bang -nargs=0 MdUnorderedList :lua require('markdown_help').UnorderedList()")
   vim.cmd("command! -bang -nargs=0 MdTaskList :lua require('markdown_help').TaskList()")
+  vim.cmd("command! -bang -nargs=0 MdLink :lua require('markdown_help').Link()")
 end
 
 function M.Heading1()
@@ -58,6 +59,13 @@ function M.UnorderedList()
   local row = cursor[1]
   local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(bufnr,row,row,false,{"* List Item", "* List Item", "* List Item"})
+end
+
+function M.Link()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row = cursor[1]
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_lines(bufnr,row,row,false,{"[text](link)"})
 end
 
 function M.init()
