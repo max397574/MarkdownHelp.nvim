@@ -42,11 +42,11 @@ function M.Heading3()
 end
 
 function M.HorizontalRule()
-  local new_text = "---"
+  local rule = "---"
   local cursor = vim.api.nvim_win_get_cursor(0)
   local row = cursor[1]
   local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_set_lines(bufnr,row-1,row-1,false,{new_text})
+  vim.api.nvim_buf_set_lines(bufnr,row-1,row-1,false,{rule})
   vim.api.nvim_del_current_line()
 end
 
